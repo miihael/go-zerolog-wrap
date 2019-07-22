@@ -11,7 +11,8 @@ import (
 
 func TestWrap(t *testing.T) {
 	var buf bytes.Buffer
-	lw := logwrap.New(zerolog.New(&buf).With().Int("test", 123).Logger(), zerolog.WarnLevel)
+	zlg := zerolog.New(&buf).With().Int("test", 123).Logger()
+	lw := logwrap.New(&zlg, zerolog.WarnLevel)
 
 	logger := lw.Logger()
 	logger.Print("test message")

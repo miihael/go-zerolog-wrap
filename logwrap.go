@@ -18,12 +18,12 @@ type LogWrapper struct {
 	w     *io.PipeWriter
 }
 
-func New(zlg zerolog.Logger, level zerolog.Level) *LogWrapper {
+func New(zlg *zerolog.Logger, level zerolog.Level) *LogWrapper {
 	r, w := io.Pipe()
 	scanner := bufio.NewScanner(r)
 	lw := &LogWrapper{
 		lg:    log.New(w, "", 0),
-		zlg:   &zlg,
+		zlg:   zlg,
 		level: level,
 		r:     r,
 		w:     w,
